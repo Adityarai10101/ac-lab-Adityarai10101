@@ -14,7 +14,8 @@ popcntRD:
     // (STUDENT TODO) Code for popcntRD goes here.
     // Input parameter n is passed in X0.
     // Output value is returned in X0.
-    add x0, x0, x0
+    lsl x0, x0, #2
+    // add x0, x0, x0
 .L1:
     add x1, x0, x0
 .L2:    
