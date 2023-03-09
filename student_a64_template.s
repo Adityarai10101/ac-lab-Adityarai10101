@@ -14,7 +14,7 @@ popcntRD:
     // (STUDENT TODO) Code for popcntRD goes here.
     // Input parameter n is passed in X0.
     // Output value is returned in X0.
-    lsl x0, x0, #2
+    lsl x0, x0, #1
     // add x0, x0, x0
 .L1:
     add x1, x0, x0
@@ -48,7 +48,8 @@ unicode_to_UTF8:
     // (STUDENT TODO) Code for unicode_to_UTF8 goes here.
     // Input parameter a is passed in X0; input parameter utf8 is passed in X1.
     // There are no output values.
-    ret
+    mov x3, #1
+    ret x3
     .size   unicode_to_UTF8, .-unicode_to_UTF8
     // ... and ends with the .size above this line.
 
