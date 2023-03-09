@@ -107,6 +107,7 @@ counter_loop:
 ustrncmp_done:
     ADD x0, xzr, xzr
     ADD x0, x0, #1
+    ret
 //    CMP w4, w5
 //    BLO ret_one
 //    BGT ret_negone
@@ -119,6 +120,7 @@ ustrncmp_done:
 ret_two:
     ADD x0, xzr, xzr
     ADD x0, x0, #2
+    ret
 ret_hundred:
     ADD x0, xzr, xzr
     ADD x0, x0, #100
