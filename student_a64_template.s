@@ -104,7 +104,7 @@ gcd_rec:
 remainder_loop:
     CMP x3, x1
     BLO remainder_done
-    SUB x3, x3, x1
+    SUBS x3, x3, x1
     ADD x2, x2, #1
     B remainder_loop
 remainder_done:
@@ -114,7 +114,7 @@ remainder_done:
     B gcd_rec
 gcd_negone:
     ADD x0, xzr, xzr
-    SUB x0, x0, #1
+    SUBS x0, x0, #1
 gcd_done:
     // done ig
 
