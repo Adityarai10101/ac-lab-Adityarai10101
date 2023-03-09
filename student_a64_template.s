@@ -85,8 +85,8 @@ ustrncmp:
 counter_loop:
     ADD x6, x0, x3
     ADD x7, x1, x3
-    LDURB w4, [x6]
-    LDURB w5, [x7]
+    LDRB w4, [x0, x3]
+    LDRB w5, [x1, x3]
     
 
     CMP w4, w5
