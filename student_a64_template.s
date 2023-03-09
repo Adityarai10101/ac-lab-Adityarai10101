@@ -88,7 +88,12 @@ counter_loop:
     LDUR w4, [x6]
     LDUR w5, [x7]
     
-    CMP x4, x5
+    CMP w4, #0
+    BEQ ret_hundred
+    CMP w5, #0
+    BEQ ret_hundred
+
+    CMP w4, w5
     BNE ustrncmp_done
 
     CMP x3, x2
@@ -100,7 +105,7 @@ counter_loop:
 
 
 ustrncmp_done:
-    CMP x4, x5
+    CMP w4, w5
     BLO ret_one
     BGT ret_negone
 ret_negone:
@@ -112,6 +117,9 @@ ret_one:
 ret_two:
     ADD x0, xzr, xzr
     ADD x0, x0, #2
+ret_hundred:
+    ADD x0, xzr, xzr
+    ADD x0, x0, #100
 
     ret
     .size   ustrncmp, .-ustrncmp
