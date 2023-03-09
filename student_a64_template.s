@@ -83,8 +83,8 @@ ustrncmp:
     // Output value is returned in X0.
     ADD x3, xzr, xzr // this value is going to be our counter up to num
 counter_loop:
-    LDRB w4, [x0, x3]
-    LDRB w5, [x1, x3]
+    LDR w4, [x0, x3]
+    LDR w5, [x1, x3]
     
     ADD x6, x3, #1
     CMP x6, x2
