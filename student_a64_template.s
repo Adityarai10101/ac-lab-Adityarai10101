@@ -93,38 +93,26 @@ ustrncmp:
     .type   gcd_rec, %function
 
 gcd_rec:
-    // is x1 0?
     MOV x2, #0
     CMP x1, x2
     BEQ gcd_done
 
-    MOV x2, x0
-    MOV x3, x1
+    MOV x2, #0
+    MOV x3, x0
 remainder_loop:
-    CMP x2, x3
+    CMP x3, x1
     BLO remainder_done
-    SUB x2, x2, x3
+    SUB x3, x3, x1
+    ADD x2, x2, #1
     B remainder_loop
 remainder_done:
-    MOV x0, x3
-    CMP x0, x1
-    BEQ gcd_done
-    BGT swap_registers
-    MOV x4, x0
     MOV x0, x1
-    MOV x1, x4
-
-    B gcd_rec
-
-swap_registers:
-    MOV x4, x1
-    MOV x1, x0
-    MOV x0, x4
+    MOV x1, x3
 
     B gcd_rec
 
 gcd_done:
-    // x0 has gcd
+    // done ig
 
 
     ret
