@@ -81,7 +81,7 @@ ustrncmp:
     // Input parameter str1 is passed in X0; input parameter str2 is passed in X1;
     //  input parameter num is passed in X2
     // Output value is returned in X0.
-    mov x0, #1
+    mov x0, #2
     ret
     .size   ustrncmp, .-ustrncmp
     // ... and ends with the .size above this line.
