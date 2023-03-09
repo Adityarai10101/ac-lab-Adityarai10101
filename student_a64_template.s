@@ -162,64 +162,53 @@ gcd_done:
     .global tree_traversal
     .type   tree_traversal, %function
 tree_traversal:
+
     // (STUDENT TODO) Code for tree_traversal goes here.
-    // Input parameter root is passed in X0; input parameter bit_string is passed in X1;
-    //  input parameter bit_string_length is passed in X2
+
+    // Input parameter root is passed in X0; input parameter bit_string is passed in x1;
+
+    // input parameter bit_string_length is passed in x2
+
     // Output value is returned in X0.
+
     CMP x2, #0
-    BEQ ret_negone
-
+    BEQ no_length
     CMP x0, #0
-    BEQ ret_negone
+    BEQ no_length
 
-    ADD x3, xzr, xzr
+    ADD x10, xzr, xzr
 
 loop_tree_traversal:
-    // shift by the amount of the counter to get the right bit in the thing
-    // so we find the right bit
-    
-    LSR x4, x1, x3
-    ANDS x4, x4, #1
-
-
-    CMP x2, x3
-    BEQ return_val
-
-    ADD x3, x3, #1
-
-    CMP x4, #1
+    CMP x2, x10
+    BEQ return_node_val
+    LSR x3, x1, x10
+    ANDS x3, x3, #1
+    ADD x10, x10, #1
+    CMP x3, #1
     BEQ go_right
-    CMP x4, #0
-    BEQ go_left
-
-
-
+    BNE go_left
 go_right:
     ADD x0, x0, #8
-    LDUR x10, [x0]
-
-    CMP x10, #0
-    BEQ ret_negone
-
-    ADD x0, x10, xzr
+    LDR x6, [x0]
+    CMP x6, #0
+    BEQ no_length
+    ADD x0, xzr, xzr
+    ADD x0, x6, x0
     B loop_tree_traversal
 go_left:
-    LDUR x10, [x0]
-
-    CMP x10, #0
-    BEQ ret_negone
-
-    ADD x0, x10, xzr
+    LDR x6, [x0]
+    CMP x6, #0
+    BEQ no_length
+    ADD x0, xzr, xzr
+    ADD x0, x6, x0
     B loop_tree_traversal
-
-return_val:
-    ADD x0, x0, 0x10000
-    LDUR x10, [x0]
-
-    ADD x0, x10, xzr
+return_node_val:
+    ADD x0, x0, #16
+    LDR x6, [x0]
+    ADD x0, xzr, xzr
+    ADD x0, x6, x0
     ret
-
-ret_negone:
+no_length:
     ADD x0, xzr, xzr
     SUBS x0, x0, #1
 
