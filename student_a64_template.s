@@ -87,12 +87,21 @@ counter_loop:
     ADD x7, x1, x3
     LDUR w4, [x6]
     LDUR w5, [x7]
+    
 
     CMP w4, w5
     BNE ustrncmp_done
 
+
+    CMP w4, #0
+    BEQ ret_hundred
+    CMP w5, #0
+    BEQ ret_hundred
+
     CMP x3, x2
     BEQ ret_two
+
+
 
     ADD x3, x3, #1
     B counter_loop
