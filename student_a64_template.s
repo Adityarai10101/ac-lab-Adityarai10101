@@ -83,40 +83,24 @@ ustrncmp:
     // Output value is returned in X0.
     ADD x3, xzr, xzr // this value is going to be our counter up to num
 counter_loop:
-    ADD x6, x0, x3
-    ADD x7, x1, x3
     LDRB w4, [x0, x3]
     LDRB w5, [x1, x3]
     
-
-    CMP w4, w5
-    BNE ustrncmp_done
-
-
-    CMP w4, #0
-    BEQ ret_hundred
-    CMP w5, #0
-    BEQ ret_hundred
-
-    CMP x3, x2
+    ADD x6, x3, #1
+    CMP x6, x2
     BEQ ret_two
 
 
+    CMP w4, w5
+    BNE compare
+    BEQ go_on
 
+
+go_on:
     ADD x3, x3, #1
     B counter_loop
 
-
-
-ustrncmp_done:
-    CMP w4, w5
-    BLO ret_negone
-    BGT ret_one
-ret_negone:
-    ADD x0, xzr, xzr
-    SUBS x0, x0, #1
-    ret
-ret_one:
+compare:
     ADD x0, xzr, xzr
     ADD x0, x0, #1
     ret
