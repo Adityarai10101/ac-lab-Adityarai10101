@@ -83,8 +83,8 @@ ustrncmp:
     // Output value is returned in X0.
     ADD x3, xzr, xzr // this value is going to be our counter up to num
 counter_loop:
-    LDR w4, [x0, x3]
-    LDR w5, [x1, x3]
+    LDUR w4, [x0, x3]
+    LDUR w5, [x1, x3]
     
     ADD x6, x3, #1
     CMP x6, x2
@@ -189,14 +189,14 @@ loop_tree_traversal:
     BNE go_left
 go_right:
     ADD x0, x0, #8
-    LDR x6, [x0]
+    LDUR x6, [x0]
     CMP x6, #0
     BEQ no_length
     ADD x0, xzr, xzr
     ADD x0, x6, x0
     B loop_tree_traversal
 go_left:
-    LDR x6, [x0]
+    LDUR x6, [x0]
     CMP x6, #0
     BEQ no_length
     ADD x0, xzr, xzr
@@ -204,7 +204,7 @@ go_left:
     B loop_tree_traversal
 return_node_val:
     ADD x0, x0, #16
-    LDR x6, [x0]
+    LDUR x6, [x0]
     ADD x0, xzr, xzr
     ADD x0, x6, x0
     ret
