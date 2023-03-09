@@ -48,8 +48,7 @@ unicode_to_UTF8:
     // (STUDENT TODO) Code for unicode_to_UTF8 goes here.
     // Input parameter a is passed in X0; input parameter utf8 is passed in X1.
     // There are no output values.
-    mov x3, #1
-    ret x3
+    ret
     .size   unicode_to_UTF8, .-unicode_to_UTF8
     // ... and ends with the .size above this line.
 
@@ -82,6 +81,7 @@ ustrncmp:
     // Input parameter str1 is passed in X0; input parameter str2 is passed in X1;
     //  input parameter num is passed in X2
     // Output value is returned in X0.
+    mov x0, #1
     ret
     .size   ustrncmp, .-ustrncmp
     // ... and ends with the .size above this line.
