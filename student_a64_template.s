@@ -181,6 +181,10 @@ loop_tree_traversal:
     LSR x4, x1, x3
     ANDS x4, x4, #1
 
+
+    CMP x2, x3
+    BEQ return_val
+
     ADD x3, x3, #1
 
     CMP x4, #1
@@ -188,8 +192,6 @@ loop_tree_traversal:
     CMP x4, #0
     BEQ go_left
 
-    CMP x2, x3
-    BEQ return_val
 
 
 go_right:
