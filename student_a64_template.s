@@ -97,7 +97,7 @@ gcd_rec:
     CMP x1, x2
     BEQ gcd_done
     CMP x0, x2
-    BEQ gcd_done
+    BEQ gcd_negone
 
     MOV x2, #0
     MOV x3, x0
@@ -112,7 +112,8 @@ remainder_done:
     MOV x1, x3
 
     B gcd_rec
-
+gcd_negone:
+    MOV x0, #-1
 gcd_done:
     // done ig
 
