@@ -105,15 +105,17 @@ counter_loop:
 
 
 ustrncmp_done:
-    CMP w4, w5
-    BLO ret_one
-    BGT ret_negone
-ret_negone:
-    ADD x0, xzr, xzr
-    SUBS x0, x0, #1
-ret_one:
     ADD x0, xzr, xzr
     ADD x0, x0, #1
+//    CMP w4, w5
+//    BLO ret_one
+//    BGT ret_negone
+//ret_negone:
+//    ADD x0, xzr, xzr
+//    SUBS x0, x0, #1
+//ret_one:
+//    ADD x0, xzr, xzr
+//    ADD x0, x0, #1
 ret_two:
     ADD x0, xzr, xzr
     ADD x0, x0, #2
