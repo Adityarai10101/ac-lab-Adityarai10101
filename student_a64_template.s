@@ -117,9 +117,9 @@ remainder_done:
     B gcd_rec
 
 swap_registers:
-    MOV x4, x0
-    MOV x0, x1
-    MOV x1, x4
+    MOV x4, x1
+    MOV x1, x0
+    MOV x0, x4
 
     B gcd_rec
 
