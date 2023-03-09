@@ -93,14 +93,14 @@ ustrncmp:
     .type   gcd_rec, %function
 
 gcd_rec:
-    MOV x2, #0
+    ADD x2, xzr, xzr
     CMP x1, x2
     BEQ gcd_done
     CMP x0, x2
     BEQ gcd_negone
 
-    MOV x2, #0
-    MOV x3, x0
+    ADD x2, xzr, xzr
+    ADD x3, xzr, x0
 remainder_loop:
     CMP x3, x1
     BLO remainder_done
@@ -108,12 +108,13 @@ remainder_loop:
     ADD x2, x2, #1
     B remainder_loop
 remainder_done:
-    MOV x0, x1
-    MOV x1, x3
+    ADD x0, xzr, x1
+    ADD x1, xzr, x3
 
     B gcd_rec
 gcd_negone:
-    MOV x0, #-1
+    ADD x0, xzr, xzr
+    SUB x0, x0, #1
 gcd_done:
     // done ig
 
