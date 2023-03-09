@@ -81,7 +81,38 @@ ustrncmp:
     // Input parameter str1 is passed in X0; input parameter str2 is passed in X1;
     //  input parameter num is passed in X2
     // Output value is returned in X0.
-    mov x0, #2
+    ADD x3, xzr, xzr // this value is going to be our counter up to num
+counter_loop:
+    ADD x6, x0, x3
+    ADD x7, x1, x3
+    LDUR w4, [x6]
+    LDUR w5, [x7]
+    
+    CMP x4, x5
+    BNE ustrncmp_done
+
+    CMP x3, x2
+    BEQ ret_two
+
+    ADD x3, x3, #1
+    B counter_loop
+
+
+
+ustrncmp_done:
+    CMP x4, x5
+    BLO ret_negone
+    BGT ret_one
+ret_negone:
+    ADD x0, xzr, xzr
+    SUBS x0, x0, #1
+ret_one:
+    ADD x0, xzr, xzr
+    ADD x0, x0, #1
+ret_two:
+    ADD x0, xzr, xzr
+    ADD x0, x0, #2
+
     ret
     .size   ustrncmp, .-ustrncmp
     // ... and ends with the .size above this line.
