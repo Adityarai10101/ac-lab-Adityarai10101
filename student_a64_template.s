@@ -96,6 +96,8 @@ gcd_rec:
     MOV x2, #0
     CMP x1, x2
     BEQ gcd_done
+    CMP x0, x2
+    BEQ gcd_done
 
     MOV x2, #0
     MOV x3, x0
