@@ -91,13 +91,48 @@ ustrncmp:
     .p2align 3,,7
     .global gcd_rec
     .type   gcd_rec, %function
+
 gcd_rec:
-    // (STUDENT TODO) Code for gcd_rec goes here.
-    // Input parameter a is passed in X0; input parameter b is passed in X1.
-    // Output value is returned in X0.
+    // is x1 0?
+    MOV x2, #0
+    CMP x1, x2
+    BEQ gcd_done
+
+    MOV x2, x0
+    MOV x3, x1
+remainder_loop:
+    CMP x2, x3
+    BLO remainder_done
+    SUB x2, x2, x3
+    B remainder_loop
+remainder_done:
+    MOV x0, x3
+    CMP x0, x1
+    BEQ gcd_done
+    BGT swap_registers
+    MOV x4, x0
+    MOV x0, x1
+    MOV x1, x4
+
+    B gcd_rec
+
+swap_registers:
+    MOV x4, x0
+    MOV x0, x1
+    MOV x1, x4
+
+    B gcd_rec
+
+gcd_done:
+    // x0 has gcd
+
+
     ret
     .size   gcd_rec, .-gcd_rec
     // ... and ends with the .size above this line.
+
+
+
 
     // Every function starts from the .align below this line ...
     .align  2
