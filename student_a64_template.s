@@ -166,6 +166,61 @@ tree_traversal:
     // Input parameter root is passed in X0; input parameter bit_string is passed in X1;
     //  input parameter bit_string_length is passed in X2
     // Output value is returned in X0.
+    CMP x2, #0
+    BEQ ret_negone
+
+    CMP x0, #0
+    BEQ ret_negone
+
+    ADD x3, xzr, xzr
+
+loop_tree_traversal:
+    // shift by the amount of the counter to get the right bit in the thing
+    // so we find the right bit
+    
+    LSR x4, x1, x3
+    ANDS x4, x4, #1
+
+    ADD x3, x3, #1
+
+    CMP x4, #1
+    BEQ go_right
+    CMP x4, #0
+    BEQ go_left
+
+    CMP x2, x3
+    BEQ return_val
+
+
+go_right:
+    ADD x0, x0, #8
+    LDUR x10, [x0]
+
+    CMP x10, #0
+    BEQ ret_negone
+
+    ADD x0, x10, xzr
+    B loop_tree_traversal
+go_left:
+    LDUR x10, [x0]
+
+    CMP x10, #0
+    BEQ ret_negone
+
+    ADD x0, x10, xzr
+    B loop_tree_traversal
+
+return_val:
+    ADD x0, x0, 0x10000
+    LDUR x10, [x0]
+
+    ADD x0, x10, xzr
+    ret
+
+ret_negone:
+    ADD x0, xzr, xzr
+    SUBS x0, x0, #1
+
     ret
     .size   tree_traversal, .-tree_traversal
     // ... and ends with the .size above this line.
